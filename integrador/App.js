@@ -4,10 +4,20 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
+import Home from './src/screens/Home';
+import Login from './src/screens/Login';
+import Profile from './src/screens/Profile';
+import Register from './src/screens/Register';
+import HomeMenu from './src/components/HomeMenu';
+import { auth } from './src/firebase/config';
+
+
+
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
+
   return (
     <NavigationContainer>
       <Stack.Navigator >
@@ -27,3 +37,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
