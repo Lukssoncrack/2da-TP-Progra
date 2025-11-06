@@ -15,15 +15,17 @@ function HomeMenu() {
             <Tab.Screen name="Home" component={ Home } options={{headerShown:false, tabBarIcon:()=> 
     <FontAwesome5 name="home" size={24} color="black" />}
          } />
-            <Tab.Screen name="Profile" component={ Profile }
-          options={ {headerShown:false, tabBarIcon:()=> 
-    <AntDesign name="user" size={24} color="black" />}
-         } />
+     
 
         <Tab.Screen name="NuevoPosteo" component={ NuevoPosteo }
         options={ {headerShown:false, tabBarIcon: ()=>
     <AntDesign name="plus-circle" size={24} color="black" />}
         }/>
+
+               <Tab.Screen name="Profile" component={ Profile }
+          options={ {headerShown:false, tabBarIcon:()=> 
+    <AntDesign name="user" size={24} color="black" />}
+         } />
           
         </Tab.Navigator>
     )

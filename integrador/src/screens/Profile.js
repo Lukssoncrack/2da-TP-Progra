@@ -1,27 +1,71 @@
 import React, {Component} from "react";
 import { View, Text, Pressable, StyleSheet} from 'react-native';
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 
 
 class Profile extends Component{
     constructor(props){
         super(props)
-        this.state=''
+        this.state={
+          email: auth.currentUser.email,
+          userName: "",
+          userPosts: [],
+        }
     }
+
+ componentDidMount() {
+    db.collection('users')
+      .where('email', '==', auth.currentUser.email)
+      .onSnapshot(docs => {
+        docs.forEach(doc => {
+          this.setState({ userName: doc.data().user });
+        });
+      });
+
+
+    db.collection('posts')
+      .where('email', '==', auth.currentUser.email)
+      .onSnapshot(docs => {
+        let postArray = [];
+        docs.forEach(doc => {
+          const postData = doc.data();
+          postArray.push({
+            id: doc.id,
+            data: postData,
+          });
+        });
+                postArray.sort((a, b) => b.data.createdAt - a.data.createdAt);
+        this.setState({ userPosts: postArray });
+      });
+}
+
+  handleLogout = () => {
+    auth.signOut()
+      .then(() => {
+        this.props.navigation.navigate('Login');
+      })
+      .catch((error) => {
+        console.error("Error al cerrar sesión: ", error);
+      });
+  };
+
+
+
+
 logout (){
 auth.signOut()
   this.props.navigation.navigate("Login")
 }
 
 render(){
+
+
     return(
         <View style={styles.contendor}>
             <Text style={styles.titulo}>Profile</Text>
-                        <Pressable style={styles.boton}
-                            onPress={ ()=> this.props.navigation.navigate("Login")}>
-                            <Text  style={styles.text}>Log out</Text>
-            
-                        </Pressable>
+        <Pressable style={styles.buttonBlue} onPress={this.handleLogout}>
+          <Text style={styles.buttonText}>Logout</Text>
+        </Pressable>
 
         </View>
     )
@@ -43,6 +87,20 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: '80%',
     alignItems: 'center',
+  },
+    buttonBlue: {
+    backgroundColor: '#3A3A3A',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 16,
+    fontFamily: 'Roboto',
   },
   text: {
     fontWeight: 'bold',
