@@ -1,15 +1,30 @@
-import React from "react";
+import React, {Component} from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import NuevoPosteo from "../screens/NuevoPosteo";
+import { auth, db } from "../firebase/config";
 
 
 const Tab = createBottomTabNavigator();
 
-function HomeMenu() {
+class HomeMenu extends Component { 
+         constructor(props) {
+        super(props);
+
+    }
+    
+    componentDidMount() {
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                this.props.navigation.navigate('Login')
+            }
+        })
+    }
+
+    render() {
     return(
         <Tab.Navigator screenOptions={{tabBarShowLabel: false}}>
             <Tab.Screen name="Home" component={ Home } options={{headerShown:false, tabBarIcon:()=> 
@@ -30,7 +45,7 @@ function HomeMenu() {
         </Tab.Navigator>
     )
 }
-
+}
 
 
 export default HomeMenu;

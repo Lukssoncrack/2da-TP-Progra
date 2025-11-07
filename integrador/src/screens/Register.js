@@ -20,7 +20,7 @@ class Register extends Component {
     
 
     if (!email.includes("@")) {
-      this.setState({ error: "Email mal" });
+      this.setState({ error: "Email mal formateado" });
       return;
     }
 

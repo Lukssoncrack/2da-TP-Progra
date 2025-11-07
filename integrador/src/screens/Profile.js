@@ -58,11 +58,16 @@ auth.signOut()
 }
 
 render(){
-
+  
+  const userPosts = this.state;
 
     return(
         <View style={styles.contendor}>
+
             <Text style={styles.titulo}>Profile</Text>
+             <Text style={styles.description}>Email: {this.state.email}</Text>
+          <Text style={styles.description}>Usuario: {this.state.userName}</Text>
+          <Text style={styles.description}>Número de Posts: {userPosts.length}</Text>
         <Pressable style={styles.buttonBlue} onPress={this.handleLogout}>
           <Text style={styles.buttonText}>Logout</Text>
         </Pressable>
