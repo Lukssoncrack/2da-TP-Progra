@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { View, Text, Pressable, StyleSheet} from 'react-native';
+import { View, Text, FlatList,Pressable, StyleSheet} from 'react-native';
 import { auth, db } from "../firebase/config";
 
 
@@ -72,11 +72,32 @@ render(){
           <Text style={styles.buttonText}>Logout</Text>
         </Pressable>
 
+                {userPosts.length === 0 ? (
+          <Text style={styles.noPostsText}>No hay posts</Text>
+        ) : (
+        <FlatList
+          data={userPosts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.postContainer}>
+            
+              <Text style={styles.postText}>{item.data.descrip}</Text>
+              <Pressable
+                style={styles.deleteButton}
+                onPress={() => this.handleDeletePost(item.id)}
+              >
+                <Text style={styles.deleteText}>Eliminar</Text>
+              </Pressable>
+            </View>
+         )}
+         />
+)}
         </View>
     )
 }
 }
 
+export default Profile;
 
 const styles = StyleSheet.create({
              contendor: {
@@ -116,4 +137,3 @@ const styles = StyleSheet.create({
     color: '#000',              
   },
         })
-export default Profile;
