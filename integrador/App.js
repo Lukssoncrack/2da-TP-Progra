@@ -10,7 +10,7 @@ import Profile from './src/screens/Profile';
 import Register from './src/screens/Register';
 import HomeMenu from './src/components/HomeMenu';
 import { auth } from './src/firebase/config';
-
+import NuevoComentario from './src/screens/NuevoComentario';
 
 
 
@@ -24,6 +24,8 @@ export default function App() {
         <Stack.Screen name='Register' component={ Register }  options={ { headerShown: false } }/>
         <Stack.Screen name='Login' component={ Login }  options={ { headerShown: false } }/>
         <Stack.Screen name='HomeMenu' component={ HomeMenu }  options={ { headerShown: false } }/>
+        <Stack.Screen name='NuevoComentario' component={ NuevoComentario }  options={ { headerShown: false } }/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
