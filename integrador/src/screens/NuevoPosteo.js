@@ -36,66 +36,94 @@ class NuevoPosteo extends Component{
 
     
     render(){
-    return(
-        <View style={styles.conteiner}>
-            <Text style={styles.title}>Nuevo Post</Text>
-            <Pressable style={styles.boton} onPress={()=>this.props.navigation.navigate('Home')}> 
-                <Text>Volver al Home</Text>
-            </Pressable>
-            <Text style={styles.subtitle}>Mensaje</Text>
-            <TextInput style={styles.input} keyboardType="default" onChangeText={text=>this.setState({message:text})} value={this.state.message}/>
-            <Text style={styles.error}>{this.state.error}</Text>
-            <Pressable style={styles.boton2} onPress={()=>this.onSubmit()}> 
-                <Text>Crear Post</Text>
-            </Pressable>
-             
-        </View>
-    )
-}
-}
+    return (
+            <View style={styles.container}>
+                <Text style={styles.title}>Nuevo Post</Text>
 
+                <Pressable style={styles.btnSecondary} onPress={() => this.props.navigation.navigate('Home')}>
+                    <Text style={styles.btnSecondaryText}>Volver al Home</Text>
+                </Pressable>
+
+                <Text style={styles.label}>Mensaje</Text>
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Escribí tu mensaje..."
+                    onChangeText={text => this.setState({ message: text })}
+                    value={this.state.message}
+                />
+
+                {this.state.error !== "" ? (
+                    <Text style={styles.error}>{this.state.error}</Text>
+                ) : null}
+
+                <Pressable style={styles.btnPrimary} onPress={() => this.onSubmit()}>
+                    <Text style={styles.btnPrimaryText}>Crear Post</Text>
+                </Pressable>
+            </View>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
-    title:{
-        fontSize:20,
-        fontWeight:'bold',
-        marginBottom:5,
-        marginTop: 7,
+    container: {
+        flex: 1,
+        backgroundColor: "#F4F4F4",
+        padding: 20,
+        justifyContent: "center",
     },
-    boton:{
-        backgroundColor:'orange',
-        borderRadius:4,
-        padding:10,
-        alignItems:'center',
-        marginBottom:7,
-        marginTop: 7,
+    title: {
+        fontSize: 28,
+        fontWeight: "700",
+        color: "#222",
+        textAlign: "center",
+        marginBottom: 25,
     },
-    boton2:{
-        backgroundColor:'lightblue',
-        borderRadius:4,
-        padding:10,
-        alignItems:'center',
-        marginTop: 9,
+    label: {
+        fontSize: 16,
+        fontWeight: "600",
+        marginBottom: 8,
+        color: "#333",
     },
-    conteiner:{
-        padding:10
+    input: {
+        backgroundColor: "#FFF",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: "#CCC",
+        padding: 15,
+        fontSize: 16,
+        marginBottom: 15,
     },
-    input:{
-        borderColor: 'grey',
-        borderRadius: 3,
-        borderWidth: 2,
-        padding: 10,
+    error: {
+        color: "red",
+        fontSize: 14,
+        marginBottom: 10,
+        textAlign: "center",
     },
-    subtitle:{
-        fontSize:15,
-        fontWeight:'semibold',
-        marginBottom:5,
-        marginTop:7,
+    btnPrimary: {
+        backgroundColor: "#222",
+        paddingVertical: 14,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 10,
     },
-    error:{
-        color:'red'
-    }
-  
-  });
+    btnPrimaryText: {
+        color: "#FFF",
+        fontSize: 16,
+        fontWeight: "600",
+    },
+    btnSecondary: {
+        backgroundColor: "#E0E0E0",
+        paddingVertical: 12,
+        borderRadius: 10,
+        alignItems: "center",
+        marginBottom: 25,
+    },
+    btnSecondaryText: {
+        color: "#333",
+        fontSize: 15,
+        fontWeight: "600",
+    },
+});
 
 export default NuevoPosteo

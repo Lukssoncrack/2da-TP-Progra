@@ -49,76 +49,104 @@ class Post extends Component {
 
     render() {
         return (
-            <View style={styles.conteiner}>
+            <View style={styles.postContainer}>
                 
-                <Text style={styles.title}>{this.props.postData.email}</Text>
+                <Text style={styles.email}>{this.props.postData.email}</Text>
                 <Text style={styles.message}>{this.props.postData.message}</Text>
                 <Text style={styles.likes}>Likes: {this.props.postData.likes ? this.props.postData.likes.length : 0}</Text>
-                {auth.currentUser ? (this.props.postData.likes.includes(auth.currentUser.email) ?
-                    <Pressable style={styles.boton2} onPress={() => this.onUnlike()}>
-                        <Text>Quitar like</Text>
-                    </Pressable>
-                    :
-                    <Pressable style={styles.boton} onPress={() => this.onLike()}>
-                        <Text>Like</Text>
-                    </Pressable>) : (<Text style={styles.noAuth}>Debes estar logueado para dar like</Text>)}
 
-                    <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('NuevoComentario')}>
-                        <Text>Comentar</Text>
-                    </Pressable>
-                    
+                {auth.currentUser ? (
+                    this.props.postData.likes.includes(auth.currentUser.email) ? (
+                        <Pressable style={styles.unlikeButton} onPress={() => this.onUnlike()}>
+                            <Text style={styles.unlikeText}>Quitar like</Text>
+                        </Pressable>
+                    ) : (
+                        <Pressable style={styles.likeButton} onPress={() => this.onLike()}>
+                            <Text style={styles.likeText}>Like</Text>
+                        </Pressable>
+                    )
+                ) : (
+                    <Text style={styles.noAuth}>Debes estar logueado para dar like</Text>
+                )}
+
+                <Pressable 
+                    style={styles.commentButton} 
+                    onPress={() => this.props.navigation.navigate('NuevoComentario')}
+                >
+                    <Text style={styles.commentText}>Comentar</Text>
+                </Pressable>
+
             </View>
         )
     }
 }
+
 const styles = StyleSheet.create({
-flatlist: {
-width: '100%',
-flex: 1
-
-},
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 5
-    },
-    message: {
-        fontSize: 16,
-        marginBottom: 10
-    },
-    likes: {
-        fontSize: 14,
-        marginBottom: 5,
-        color: 'gray'
-    },
-    boton: {
-        backgroundColor: 'orange',
-        borderRadius: 4,
-        padding: 10,
-        alignItems: 'center',
-        marginBottom: 7
-    },
-    boton2: {
-        backgroundColor: 'lightblue',
-        borderRadius: 4,
-        padding: 10,
-        alignItems: 'center',
-        marginBottom: 7
-    },
-    noAuth: {
-        fontSize: 12,
-        color: 'red',
-        textAlign: 'center',
-        marginTop: 5
-    },
-    conteiner: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        margin: 5,
-    }
-
+  postContainer: {
+    backgroundColor: "#FFF",
+    padding: 16,
+    borderRadius: 14,
+    marginVertical: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
+  },
+  email: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#444",
+    marginBottom: 6,
+  },
+  message: {
+    fontSize: 16,
+    color: "#222",
+    marginBottom: 10,
+  },
+  likes: {
+    fontSize: 14,
+    color: "#777",
+    marginBottom: 10,
+  },
+  likeButton: {
+    backgroundColor: "#222",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  likeText: {
+    color: "#FFF",
+    fontWeight: "600",
+  },
+  unlikeButton: {
+    backgroundColor: "#555",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  unlikeText: {
+    color: "#FFF",
+    fontWeight: "600",
+  },
+  noAuth: {
+    fontSize: 12,
+    color: "red",
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  commentButton: {
+    backgroundColor: "#EEE",
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  commentText: {
+    color: "#222",
+    fontWeight: "600",
+  },
 });
 
-
-export default Post
+export default Post;

@@ -99,40 +99,74 @@ render(){
 export default Profile;
 
 const styles = StyleSheet.create({
-             contendor: {
-    flex: 1,                   
-    justifyContent: 'center',  
-    alignItems: 'center',      
-    backgroundColor: '#f2f2f2' 
-  },
-  boton: {
-    backgroundColor: '#d3d3d3',
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 10,
-    width: '80%',
-    alignItems: 'center',
-  },
-    buttonBlue: {
-    backgroundColor: '#3A3A3A',
-    paddingVertical: 10,
+  contendor: {
+    flex: 1,
+    paddingTop: 50,
     paddingHorizontal: 20,
-    borderRadius: 5,
-    alignItems: 'center',
+    backgroundColor: "#F4F4F4",
+  },
+
+  titulo: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#222",
     marginBottom: 20,
+    alignSelf: "center",
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '600',
+
+  description: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    color: "#555",
+    marginBottom: 6,
   },
-  text: {
-    fontWeight: 'bold',
-  },titulo: {
-    fontSize: 32,               
-    fontWeight: 'bold',
-    marginBottom: 30,           
-    color: '#000',              
+
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#333",
+    marginTop: 25,
+    marginBottom: 10,
   },
-        })
+
+  buttonBlue: {
+    backgroundColor: "black",
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 20,
+    width: "100%",
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "600",
+  },
+
+  noPostsText: {
+    fontSize: 16,
+    color: "#888",
+    marginTop: 20,
+    alignSelf: "center",
+  },
+
+  postContainer: {
+    backgroundColor: "#FFF",
+    width: "100%",
+    padding: 15,
+    marginVertical: 8,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+  
+  },
+
+  postText: {
+    fontSize: 16,
+    color: "#333",
+    marginBottom: 5,
+    fontWeight: "500",
+  },
+});

@@ -51,40 +51,40 @@ class Login extends Component {
       }
 
      })
-    return (
-      <View style={styles.contendor}>
-        <Text style={styles.titulo}>Login</Text>
+   return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Login</Text>
 
         <TextInput
-          style={styles.field}
+          style={styles.input}
           keyboardType="email-address"
-          placeholder="email"
+          placeholder="Email"
           onChangeText={(text) => this.setState({ email: text })}
           value={this.state.email}
         />
 
         <TextInput
-          style={styles.field}
+          style={styles.input}
           keyboardType="default"
-          placeholder="password"
+          placeholder="Password"
           secureTextEntry={true}
           onChangeText={(text) => this.setState({ password: text })}
           value={this.state.password}
         />
 
-        <Pressable style={styles.boton} onPress={() => this.onSubmit(this.state.email, this.state.password)}>
-          <Text style={styles.text}>Iniciar sesión</Text>
+        <Pressable style={styles.button} onPress={() => this.onSubmit(this.state.email, this.state.password)}>
+          <Text style={styles.buttonText}>Iniciar sesión</Text>
         </Pressable>
 
         <Pressable
-          style={styles.boton}
+          style={styles.buttonSecondary}
           onPress={() => this.props.navigation.navigate("Register")}
         >
-          <Text style={styles.text}>Ir a Register</Text>
+          <Text style={styles.buttonSecondaryText}>Ir a Register</Text>
         </Pressable>
 
         {this.state.error ? (
-          <Text style={{ color: "red", marginTop: 10 }}>{this.state.error}</Text>
+          <Text style={styles.error}>{this.state.error}</Text>
         ) : null}
       </View>
     );
@@ -92,45 +92,57 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  contendor: {
+  container: {
     flex: 1,
+    backgroundColor: "#F4F4F4",
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f2f2f2",
-    paddingHorizontal: 10,
-    marginTop: 20,
+    paddingHorizontal: 25,
   },
-  titulo: {
+  title: {
     fontSize: 32,
-    fontWeight: "bold",
+    fontWeight: "700",
+    color: "#111",
     marginBottom: 30,
-    color: "#000",
+    textAlign: "center",
   },
-  field: {
-    height: 50,
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 6,
+  input: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    padding: 15,
     marginVertical: 10,
-    width: "80%",
-    backgroundColor: "#fff",
-  },
-  boton: {
-    backgroundColor: "#28a745",
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 4,
+    fontSize: 16,
+    borderColor: "#DDD",
     borderWidth: 1,
-    borderColor: "#28a745",
+    width: "100%",
+  },
+  button: {
+    backgroundColor: "#222",
+    paddingVertical: 14,
+    borderRadius: 10,
     alignItems: "center",
-    width: "80%",
-    marginVertical: 10,
+    marginTop: 15,
   },
-  text: {
-    color: "#fff",
-    fontWeight: "bold",
+  buttonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  buttonSecondary: {
+    backgroundColor: "#EEE",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  buttonSecondaryText: {
+    color: "#222",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  error: {
+    marginTop: 15,
+    color: "red",
+    fontSize: 15,
     textAlign: "center",
   },
 });
