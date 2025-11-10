@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, TextInput, Pressable, Text, View, } from "react-native";
 import { db, auth } from '../firebase/config';
-import NavegacionComentario from "../components/NavegacionComentario";
+
 
 class NuevoComentario extends Component {
     constructor(props) {
