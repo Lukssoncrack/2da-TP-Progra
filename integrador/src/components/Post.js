@@ -11,7 +11,7 @@ class Post extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+
         }
     }
 
@@ -62,7 +62,7 @@ class Post extends Component {
                         <Text>Like</Text>
                     </Pressable>) : (<Text style={styles.noAuth}>Debes estar logueado para dar like</Text>)}
 
-                    <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('NuevoComentario')}>
+                    <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('NuevoComentario', {id: this.props.id, email: this.props.postData.email, msj: this.props.postData.message, likes: this.props.postData.likes, comentarios: this.props.postData.comentarios})}>
                         <Text>Comentar</Text>
                     </Pressable>
             </View>

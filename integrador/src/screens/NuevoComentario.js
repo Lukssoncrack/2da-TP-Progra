@@ -1,31 +1,46 @@
 import React, { Component } from "react";
-import { StyleSheet, TextInput, Pressable, Text, View, } from "react-native";
+import { StyleSheet, TextInput, Pressable, Text, View, FlatList, } from "react-native";
 import { db, auth } from '../firebase/config'
+import firebase from "firebase";
 
 class NuevoComentario extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            comentario: ""
+            comentario: "",
+            comentarios: [],
         }
     }
 
+    
+    
+
     crearComentario() {
-        db.collection('comentarios').add({
-            owner: auth.currentUser.email,
-            texto: this.state.comentario,
-            createdAt: Date.now(),
-        })
-            .then(() => {
-                this.setState({ comentario: "" }) 
-                this.props.navigation.navigate('HomeMenu')
+        db.collection('posts')
+            .doc(this.props.route.params.id)
+            .update({
+                comentarios: firebase.firestore.FieldValue.arrayUnion({
+                    email: auth.currentUser.email,
+                    comentario: this.state.comentario,
+
+                })
             })
-            .catch(e => console.log(e))
+            .then(response => {
+                console.log('Comentario hecho')
+                
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
         return (
             <View style={styles.conteiner}>
+                <Text style={styles.title}>Post</Text>
+                <Text>{this.props.route.params.email}</Text>
+                <Text>{this.props.route.params.msj}</Text>
+                <Text>Likes: {this.props.route.params.likes.length}</Text>
                 <Text style={styles.title}> Nuevo comentario</Text>
                 <TextInput style={styles.input} placeholder="Escribe tu comentario aqui" value={this.state.comentario} onChangeText={text => this.setState({ comentario: text })} />
                 <Pressable style={styles.boton} onPress={() => this.crearComentario()}>
@@ -37,7 +52,12 @@ class NuevoComentario extends Component {
                 <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('HomeMenu')}>
                     <Text>Volver al Home</Text>
                 </Pressable>
-
+                <Text>Comentarios: </Text>
+                <FlatList
+                    data = {this.props.route.params.comentarios}
+                    keyExtractor={this.props.route.params.comentarios.comentario}
+                    renderItem={({item}) => <Text>aa: {item.comentario}</Text>}
+                />
             </View>
         )
     }
