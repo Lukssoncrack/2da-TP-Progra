@@ -20,10 +20,11 @@ class NuevoPosteo extends Component{
                 message: this.state.message,
                 createdAt: Date.now(),
                 likes: [],
+                comentarios: [],
             })
              .then(response => {
                 this.setState({posted: true})
-                this.props.navigation.navigate('Home')
+                this.props.navigation.navigate('NavegacionComentario')
             })
             .catch(error => {
                 this.setState({error: 'Fallo al crear el post'})
@@ -40,7 +41,7 @@ class NuevoPosteo extends Component{
             <View style={styles.container}>
                 <Text style={styles.title}>Nuevo Post</Text>
 
-                <Pressable style={styles.btnSecondary} onPress={() => this.props.navigation.navigate('Home')}>
+                <Pressable style={styles.btnSecondary} onPress={() => this.props.navigation.navigate('NavegacionComentario')}>
                     <Text style={styles.btnSecondaryText}>Volver al Home</Text>
                 </Pressable>
 
