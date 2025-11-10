@@ -11,7 +11,7 @@ class Post extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+
         }
     }
 
@@ -71,11 +71,12 @@ class Post extends Component {
 
                 <Pressable 
                     style={styles.commentButton} 
-                    onPress={() => this.props.navigation.navigate('NuevoComentario')}
+                   onPress={() => this.props.navigation.navigate('NuevoComentario', {id: this.props.id, email: this.props.postData.email, msj: this.props.postData.message, likes: this.props.postData.likes, comentarios: this.props.postData.comentarios})}
                 >
                     <Text style={styles.commentText}>Comentar</Text>
                 </Pressable>
 
+                
             </View>
         )
     }
