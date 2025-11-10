@@ -36,35 +36,51 @@ class Home extends Component{
     }
 
     render(){
-          console.log(auth.currentUser)
         return(
-            <View>
-                <Text>Posts:</Text>
-                <FlatList
-                    data={this.state.posts}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({item}) => <Post postData={item.data} id={item.id.toString()} navigation={this.props.navigation} />}
-                />
+            <View style={styles.container}>
+                <Text style={styles.title}>Posts</Text>
+
+                {this.state.posts.length === 0 ? (
+                    <Text style={styles.noPosts}>No hay posteos disponibles</Text>
+                ) : (
+                    <FlatList
+                        data={this.state.posts}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({item}) => 
+                            <Post 
+                                postData={item.data} 
+                                id={item.id.toString()} 
+                                navigation={this.props.navigation}
+                            />
+                        }
+                    />
+                )}
             </View>
         )
     }
 }
 
-
 const styles = StyleSheet.create({
-             contendor: {
-    flex: 1,                   
-    justifyContent: 'center',  
-    alignItems: 'center',      
-    backgroundColor: '#f2f2f2' 
+  container: {
+    flex: 1,    
+    backgroundColor: '#a1b7a1ff',
+    paddingHorizontal: 16,
+    paddingTop: 20,
   },
-  titulo: {
-    fontSize: 32,               
-    fontWeight: 'bold',
-    marginBottom: 30,           
-    color: '#000',              
-  },
-        })
+  title: {
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#222",
+    marginBottom: 15,
+    alignSelf: "center",
 
+  },
+  noPosts: {
+    color: "#777",
+    fontSize: 16,
+    marginTop: 20,
+    alignSelf: "center",
+  },
+});
 
 export default Home;

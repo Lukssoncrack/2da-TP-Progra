@@ -60,26 +60,25 @@ class Register extends Component {
    
         })
     return (
-      <View style={styles.contendor}>
-        <Text style={styles.titulo}>Register</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Register</Text>
 
         <Pressable
-          style={styles.boton}
+          style={styles.buttonSecondary}
           onPress={() => this.props.navigation.navigate("Login")}
         >
-          <Text style={styles.text}>Ir a Login / Ya tengo cuenta</Text>
+          <Text style={styles.buttonSecondaryText}>Ir a Login / Ya tengo cuenta</Text>
         </Pressable>
 
         <TextInput
-          style={styles.field}
-          keyboardType="default"
+          style={styles.input}
           placeholder="userName"
           onChangeText={(text) => this.setState({ userName: text })}
           value={this.state.userName}
         />
 
         <TextInput
-          style={styles.field}
+          style={styles.input}
           keyboardType="email-address"
           placeholder="email"
           onChangeText={(text) => this.setState({ email: text })}
@@ -87,20 +86,19 @@ class Register extends Component {
         />
 
         <TextInput
-          style={styles.field}
-          keyboardType="default"
+          style={styles.input}
           placeholder="password"
           secureTextEntry={true}
           onChangeText={(text) => this.setState({ password: text })}
           value={this.state.password}
         />
 
-        <Pressable style={styles.boton} onPress={() => this.onSubmit(this.state.email, this.state.password)}>
-          <Text style={styles.text}>Registrar</Text>
+        <Pressable style={styles.buttonPrimary} onPress={() => this.onSubmit(this.state.email, this.state.password)}>
+          <Text style={styles.buttonPrimaryText}>Registrar</Text>
         </Pressable>
 
         {this.state.error ? (
-          <Text style={{ color: "red", marginTop: 10 }}>{this.state.error}</Text>
+          <Text style={styles.error}>{this.state.error}</Text>
         ) : null}
       </View>
     );
@@ -108,45 +106,57 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
-  contendor: {
+  container: {
     flex: 1,
+    backgroundColor: '#a1b7a1ff',
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f2f2f2",
-    paddingHorizontal: 10,
-    marginTop: 20,
+    paddingHorizontal: 25,
   },
-  titulo: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 30,
-    color: "#000",
+  title: {
+    fontSize: 30,
+    fontWeight: "700",
+    color: "#111",
+    marginBottom: 25,
+    textAlign: "center",
   },
-  field: {
-    height: 50,
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 6,
+  input: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    padding: 15,
     marginVertical: 10,
-    width: "80%",
-    backgroundColor: "#fff",
-  },
-  boton: {
-    backgroundColor: "#28a745",
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 4,
+    fontSize: 16,
     borderWidth: 1,
-    borderColor: "#28a745",
-    alignItems: "center",
-    width: "80%",
-    marginVertical: 10,
+    borderColor: "#DDD",
+    width: "100%",
   },
-  text: {
-    color: "#fff",
-    fontWeight: "bold",
+  buttonPrimary: {
+    backgroundColor: "#222",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 15,
+  },
+  buttonPrimaryText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  buttonSecondary: {
+    backgroundColor: "#EEE",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  buttonSecondaryText: {
+    color: "#222",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  error: {
+    marginTop: 15,
+    color: "red",
+    fontSize: 15,
     textAlign: "center",
   },
 });
