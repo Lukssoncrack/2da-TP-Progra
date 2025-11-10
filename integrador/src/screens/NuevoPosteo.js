@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
         marginTop: 9,
     },
     conteiner:{
-        padding:10
+        padding:10,
+        backgroundColor: "#F5F5DC",
+        height: "100%"
     },
     input:{
         borderColor: 'grey',

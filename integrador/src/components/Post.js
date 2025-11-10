@@ -104,6 +104,7 @@ flex: 1
         padding: 10,
         alignItems: 'center',
         marginBottom: 7
+        
     },
     noAuth: {
         fontSize: 12,
@@ -112,7 +113,9 @@ flex: 1
         marginTop: 5
     },
     conteiner: {
-        padding: 10
+        padding: 10,
+        
+        
     }
 
 });

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,                   
     justifyContent: 'center',  
     alignItems: 'center',      
-    backgroundColor: '#f2f2f2' 
+    backgroundColor: "#F5F5DC"
   },
   boton: {
     backgroundColor: '#d3d3d3',

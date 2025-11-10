@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, TextInput, Pressable, Text, View, } from "react-native";
-import { db, auth } from '../firebase/config'
+import { db, auth } from '../firebase/config';
+import NavegacionComentario from "../components/NavegacionComentario";
 
 class NuevoComentario extends Component {
     constructor(props) {
@@ -67,7 +68,9 @@ const styles = StyleSheet.create({
         marginTop: 9,
     },
     conteiner: {
-        padding: 10
+        padding: 10,
+        backgroundColor: "#F5F5DC",
+        
     },
     input: {
         borderColor: 'black',

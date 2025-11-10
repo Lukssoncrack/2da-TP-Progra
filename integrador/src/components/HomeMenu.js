@@ -5,6 +5,7 @@ import Profile from "../screens/Profile";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import NuevoPosteo from "../screens/NuevoPosteo";
+import NavegacionComentario from "./NavegacionComentario";
 import { auth, db } from "../firebase/config";
 
 
@@ -27,7 +28,7 @@ class HomeMenu extends Component {
     render() {
     return(
         <Tab.Navigator screenOptions={{tabBarShowLabel: false}}>
-            <Tab.Screen name="Home" component={ Home } options={{headerShown:false, tabBarIcon:()=> 
+            <Tab.Screen name="NavegacionComentario" component={ NavegacionComentario } options={{headerShown:false, tabBarIcon:()=> 
     <FontAwesome5 name="home" size={24} color="black" />}
          } />
      
@@ -43,6 +44,8 @@ class HomeMenu extends Component {
          } />
           
         </Tab.Navigator>
+
+
     )
 }
 }

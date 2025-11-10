@@ -38,8 +38,8 @@ class Home extends Component{
     render(){
           console.log(auth.currentUser)
         return(
-            <View>
-                <Text>Posts:</Text>
+            <View style = {styles.flatlist}>
+                <Text style={styles.posteo}>Posts:</Text>
                 <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id.toString()}
@@ -52,18 +52,37 @@ class Home extends Component{
 
 
 const styles = StyleSheet.create({
-             contendor: {
-    flex: 1,                   
-    justifyContent: 'center',  
-    alignItems: 'center',      
-    backgroundColor: '#f2f2f2' 
+
+    flatlist: {
+width: '100%',
+flex: 1,
+backgroundColor: "#F5F5DC"
+
+},
+    contendor: {
+flex: 1,                   
+justifyContent: 'center',  
+alignItems: 'center',      
+backgroundColor: '#f2f2f2' 
   },
-  titulo: {
-    fontSize: 32,               
-    fontWeight: 'bold',
-    marginBottom: 30,           
-    color: '#000',              
+    titulo: {
+fontSize: 32,               
+fontWeight: 'bold',
+ marginBottom: 30,           
+color: '#000',              
   },
+  posteo: {
+fontSize: 15,
+fontWeight: "bold",
+backgroundColor: '#8FBC8F',
+borderRadius: 15,
+padding:5,
+marginLeft: 10,
+marginRight: 10,
+marginTop: 5
+
+
+  }
         })
 
 
