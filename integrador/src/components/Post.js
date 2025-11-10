@@ -112,7 +112,10 @@ flex: 1
         marginTop: 5
     },
     conteiner: {
-        padding: 10
+        padding: 10,
+        borderWidth: 1,
+        borderColor: 'black',
+        margin: 5,
     }
 
 });

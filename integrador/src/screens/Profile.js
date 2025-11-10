@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { View, Text, FlatList,Pressable, StyleSheet} from 'react-native';
 import { auth, db } from "../firebase/config";
+import Post from  '../components/Post'
 
 
 class Profile extends Component{
@@ -14,6 +15,8 @@ class Profile extends Component{
     }
 
  componentDidMount() {
+
+
     db.collection('users')
       .where('email', '==', auth.currentUser.email)
       .onSnapshot(docs => {
@@ -25,7 +28,7 @@ class Profile extends Component{
 
     db.collection('posts')
       .where('email', '==', auth.currentUser.email)
-      .orderBy('createdAt', 'desc')
+
       .onSnapshot(docs => {
         let postArray = [];
         docs.forEach(doc => {
@@ -58,7 +61,9 @@ auth.signOut()
 
 render(){
   
-  const userPosts = this.state;
+  console.log(this.state.userPosts);
+  
+
 
     return(
         <View style={styles.contendor}>
@@ -66,27 +71,22 @@ render(){
             <Text style={styles.titulo}>Profile</Text>
              <Text style={styles.description}>Email: {this.state.email}</Text>
           <Text style={styles.description}>Usuario: {this.state.userName}</Text>
-          <Text style={styles.description}>Número de Posts: {userPosts.length}</Text>
+          <Text style={styles.description}>Número de Posts: {this.state.userPosts.length}</Text>
         <Pressable style={styles.buttonBlue} onPress={this.handleLogout}>
           <Text style={styles.buttonText}>Logout</Text>
         </Pressable>
 
-                {userPosts.length === 0 ? (
+                {this.state.userPosts.length === 0 ? (
           <Text style={styles.noPostsText}>No hay posts</Text>
         ) : (
         <FlatList
-          data={userPosts}
+          data={this.state.userPosts}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.postContainer}>
             
-              <Text style={styles.postText}>{item.data.descrip}</Text>
-              <Pressable
-                style={styles.deleteButton}
-                onPress={() => this.handleDeletePost(item.id)}
-              >
-                <Text style={styles.deleteText}>Eliminar</Text>
-              </Pressable>
+              <Post postData={item.data} id={item.id.toString()} navigation={this.props.navigation} />
+           
             </View>
          )}
          />
