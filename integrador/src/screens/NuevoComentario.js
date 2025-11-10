@@ -26,69 +26,93 @@ class NuevoComentario extends Component {
 
     render() {
         return (
-            <View style={styles.conteiner}>
-                <Text style={styles.title}> Nuevo comentario</Text>
-                <TextInput style={styles.input} placeholder="Escribe tu comentario aqui" value={this.state.comentario} onChangeText={text => this.setState({ comentario: text })} />
-                <Pressable style={styles.boton} onPress={() => this.crearComentario()}>
-                    <Text> Comentar </Text>
-                </Pressable>
+      <View style={styles.conteiner}>
+        <Text style={styles.title}>Nuevo comentario</Text>
 
+        <TextInput
+          style={styles.input}
+          placeholder="Escribí tu comentario..."
+          value={this.state.comentario}
+          onChangeText={text => this.setState({ comentario: text })}
+        />
 
-                <Text style={styles.title}>Home</Text>
-                <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('HomeMenu')}>
-                    <Text>Volver al Home</Text>
-                </Pressable>
+        <Pressable style={styles.boton} onPress={() => this.crearComentario()}>
+          <Text style={styles.botonText}>Comentar</Text>
+        </Pressable>
 
-            </View>
-        )
-    }
+        
+        <Pressable style={styles.botonSec} onPress={() => this.props.navigation.navigate('HomeMenu')}>
+          <Text style={styles.botonSecText}>Volver al Home</Text>
+        </Pressable>
+      </View>
+    )
+  }
 }
 
-
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 5,
-        marginTop: 7,
-    },
-    boton: {
-        backgroundColor: 'orange',
-        borderRadius: 4,
-        padding: 10,
-        alignItems: 'center',
-        marginBottom: 7,
-        marginTop: 7,
-    },
-    boton2: {
-        backgroundColor: 'lightblue',
-        borderRadius: 4,
-        padding: 10,
-        alignItems: 'center',
-        marginTop: 9,
-    },
-    conteiner: {
-        padding: 10,
-        backgroundColor: "#F5F5DC",
-        
-    },
-    input: {
-        borderColor: 'black',
-        backgroundColor: 'white',
-        borderRadius: 3,
-        borderWidth: 2,
-        padding: 8,
-    },
-    subtitle: {
-        fontSize: 15,
-        fontWeight: 'semibold',
-        marginBottom: 5,
-        marginTop: 7,
-    },
-    error: {
-        color: 'red'
-    }
-
+  conteiner: {
+    flex: 1,
+    backgroundColor: "#F4F4F4",
+    padding: 20,
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#222",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  input: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#CCC",
+    padding: 14,
+    fontSize: 16,
+    marginBottom: 14,
+  },
+  boton: {
+    backgroundColor: "#222",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  botonText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  homeTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#333",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  botonSec: {
+    backgroundColor: "#EAEAEA",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  botonSecText: {
+    color: "#222",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  subtitle: {
+    fontSize: 15,
+    fontWeight: "600",
+    marginBottom: 5,
+    marginTop: 7,
+  },
+  error: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 8,
+  },
 });
 
 export default NuevoComentario

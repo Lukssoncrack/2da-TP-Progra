@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { View, Text, FlatList,Pressable, StyleSheet} from 'react-native';
 import { auth, db } from "../firebase/config";
+import Post from  '../components/Post'
 
 
 class Profile extends Component{
@@ -14,6 +15,8 @@ class Profile extends Component{
     }
 
  componentDidMount() {
+
+
     db.collection('users')
       .where('email', '==', auth.currentUser.email)
       .onSnapshot(docs => {
@@ -25,7 +28,7 @@ class Profile extends Component{
 
     db.collection('posts')
       .where('email', '==', auth.currentUser.email)
-      .orderBy('createdAt', 'desc')
+
       .onSnapshot(docs => {
         let postArray = [];
         docs.forEach(doc => {
@@ -58,7 +61,9 @@ auth.signOut()
 
 render(){
   
-  const userPosts = this.state;
+  console.log(this.state.userPosts);
+  
+
 
     return(
         <View style={styles.contendor}>
@@ -66,27 +71,22 @@ render(){
             <Text style={styles.titulo}>Profile</Text>
              <Text style={styles.description}>Email: {this.state.email}</Text>
           <Text style={styles.description}>Usuario: {this.state.userName}</Text>
-          <Text style={styles.description}>Número de Posts: {userPosts.length}</Text>
+          <Text style={styles.description}>Número de Posts: {this.state.userPosts.length}</Text>
         <Pressable style={styles.buttonBlue} onPress={this.handleLogout}>
           <Text style={styles.buttonText}>Logout</Text>
         </Pressable>
 
-                {userPosts.length === 0 ? (
+                {this.state.userPosts.length === 0 ? (
           <Text style={styles.noPostsText}>No hay posts</Text>
         ) : (
         <FlatList
-          data={userPosts}
+          data={this.state.userPosts}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.postContainer}>
             
-              <Text style={styles.postText}>{item.data.descrip}</Text>
-              <Pressable
-                style={styles.deleteButton}
-                onPress={() => this.handleDeletePost(item.id)}
-              >
-                <Text style={styles.deleteText}>Eliminar</Text>
-              </Pressable>
+              <Post postData={item.data} id={item.id.toString()} navigation={this.props.navigation} />
+           
             </View>
          )}
          />
@@ -99,40 +99,74 @@ render(){
 export default Profile;
 
 const styles = StyleSheet.create({
-             contendor: {
-    flex: 1,                   
-    justifyContent: 'center',  
-    alignItems: 'center',      
-    backgroundColor: "#F5F5DC"
-  },
-  boton: {
-    backgroundColor: '#d3d3d3',
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 10,
-    width: '80%',
-    alignItems: 'center',
-  },
-    buttonBlue: {
-    backgroundColor: '#3A3A3A',
-    paddingVertical: 10,
+  contendor: {
+    flex: 1,
+    paddingTop: 50,
     paddingHorizontal: 20,
-    borderRadius: 5,
-    alignItems: 'center',
+    backgroundColor: "#F4F4F4",
+  },
+
+  titulo: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#222",
     marginBottom: 20,
+    alignSelf: "center",
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '600',
+
+  description: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    color: "#555",
+    marginBottom: 6,
   },
-  text: {
-    fontWeight: 'bold',
-  },titulo: {
-    fontSize: 32,               
-    fontWeight: 'bold',
-    marginBottom: 30,           
-    color: '#000',              
+
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#333",
+    marginTop: 25,
+    marginBottom: 10,
   },
-        })
+
+  buttonBlue: {
+    backgroundColor: "black",
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 20,
+    width: "100%",
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "600",
+  },
+
+  noPostsText: {
+    fontSize: 16,
+    color: "#888",
+    marginTop: 20,
+    alignSelf: "center",
+  },
+
+  postContainer: {
+    backgroundColor: "#FFF",
+    width: "100%",
+    padding: 15,
+    marginVertical: 8,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+  
+  },
+
+  postText: {
+    fontSize: 16,
+    color: "#333",
+    marginBottom: 5,
+    fontWeight: "500",
+  },
+});
