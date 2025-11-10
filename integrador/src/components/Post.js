@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { Pressable } from "react-native";
+import { Pressable, FlatList } from "react-native";
 import { Text } from "react-native";
 import { View } from "react-native";
 import { db, auth } from '../firebase/config'
@@ -50,6 +50,7 @@ class Post extends Component {
     render() {
         return (
             <View style={styles.conteiner}>
+                
                 <Text style={styles.title}>{this.props.postData.email}</Text>
                 <Text style={styles.message}>{this.props.postData.message}</Text>
                 <Text style={styles.likes}>Likes: {this.props.postData.likes ? this.props.postData.likes.length : 0}</Text>
@@ -65,11 +66,17 @@ class Post extends Component {
                     <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('NuevoComentario')}>
                         <Text>Comentar</Text>
                     </Pressable>
+                    
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
+flatlist: {
+width: '100%',
+flex: 1
+
+},
     title: {
         fontSize: 20,
         fontWeight: 'bold',

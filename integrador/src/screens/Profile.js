@@ -18,24 +18,23 @@ class Profile extends Component{
       .where('email', '==', auth.currentUser.email)
       .onSnapshot(docs => {
         docs.forEach(doc => {
-          this.setState({ userName: doc.data().user });
+          this.setState({ userName: doc.data().userName });
         });
       });
 
 
     db.collection('posts')
       .where('email', '==', auth.currentUser.email)
+      .orderBy('createdAt', 'desc')
       .onSnapshot(docs => {
         let postArray = [];
         docs.forEach(doc => {
-          const postData = doc.data();
           postArray.push({
             id: doc.id,
-            data: postData,
+            data: doc.data(),
           });
         });
-                postArray.sort((a, b) => b.data.createdAt - a.data.createdAt);
-        this.setState({ userPosts: postArray });
+          this.setState({ userPosts: postArray });
       });
 }
 
