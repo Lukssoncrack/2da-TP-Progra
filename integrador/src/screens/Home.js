@@ -62,8 +62,8 @@ class Home extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#F4F4F4",
+    flex: 1,    
+    backgroundColor: '#a1b7a1ff',
     paddingHorizontal: 16,
     paddingTop: 20,
   },
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     color: "#222",
     marginBottom: 15,
     alignSelf: "center",
+
   },
   noPosts: {
     color: "#777",

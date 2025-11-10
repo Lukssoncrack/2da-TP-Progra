@@ -52,7 +52,7 @@ class NuevoComentario extends Component {
 const styles = StyleSheet.create({
   conteiner: {
     flex: 1,
-    backgroundColor: "#F4F4F4",
+    backgroundColor: '#a1b7a1ff',
     padding: 20,
     justifyContent: "center",
   },

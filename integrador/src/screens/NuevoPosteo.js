@@ -68,7 +68,7 @@ class NuevoPosteo extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#F4F4F4",
+        backgroundColor: '#a1b7a1ff',
         padding: 20,
         justifyContent: "center",
     },

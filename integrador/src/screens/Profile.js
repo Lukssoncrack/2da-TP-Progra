@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 20,
-    backgroundColor: "#F4F4F4",
+    backgroundColor: '#a1b7a1ff',
   },
 
   titulo: {
@@ -116,8 +116,10 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: 16,
-    color: "#555",
+    color: "#000000ff",
     marginBottom: 6,
+    fontWeight: "bold"
+  
   },
 
   sectionTitle: {
