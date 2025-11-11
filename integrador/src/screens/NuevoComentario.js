@@ -15,41 +15,66 @@ class NuevoComentario extends Component {
 
 
     componentDidMount() {
-        console.log(this.props.route.params)
+        console.log(this.props.route.params);
+
+        db.collection('posts')
+            .doc(this.props.route.params.id)
+            .onSnapshot((doc) => {
+                const data = doc.data();
+                const lista = data.comentarios;
+                this.setState({ comentarios: lista });
+            });
     }
 
     crearComentario() {
+
+        const nuevoComentario = {
+            email: auth.currentUser.email,
+            comentario: this.state.comentario,
+            createdAt: Date.now()
+        };
+
         db.collection('posts')
             .doc(this.props.route.params.id)
             .update({
-                comentarios: firebase.firestore.FieldValue.arrayUnion({
-                    email: auth.currentUser.email,
-                    comentario: this.state.comentario,
+                comentarios: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
+            })
+            .then(() => {
 
-                })
-            })
-            .then(response => {
-                console.log('Comentario hecho')
+                this.setState({
+                    comentario: ""
+                });
 
             })
-            .catch(error => {
-                console.log(error)
-            })
+            .catch((error) => {
+                console.log(error);
+            });
+
     }
-
     render() {
         return (
             <View style={styles.conteiner}>
                 <Text style={styles.title}> Post</Text>
+
                 <View style={styles.postContainer}>
                     <Text style={styles.postEmail}>{this.props.route.params.email}</Text>
                     <Text style={styles.postText}>{this.props.route.params.msj}</Text>
                     <Text style={styles.postMeta}>Likes: {this.props.route.params.likes.length}</Text>
                 </View>
-                <Text style={styles.title}> Nuevo comentario</Text>
-                <Pressable style={styles.boton} onPress={() => this.crearComentario()}>
-                    <Text style={styles.blanco}> Comentar </Text>
-                </Pressable>
+
+                <Text style={styles.title}>Comentarios</Text>
+
+                <FlatList
+                    style={styles.flat}
+                    data={this.state.comentarios}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => (
+                        <View style={styles.commentContainer}>
+                            <Text style={styles.commentEmail}>{item.email}</Text>
+                            <Text style={styles.commentText}>{item.comentario}</Text>
+                        </View>
+                    )}
+                />
 
                 <TextInput
                     style={styles.input}
@@ -58,20 +83,18 @@ class NuevoComentario extends Component {
                     onChangeText={text => this.setState({ comentario: text })}
                 />
 
-                <Text style={styles.title}>Home</Text>
-                <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate('Home')}>
-                    <Text style={styles.blanco}>Volver al Home</Text>
+
+
+                <Pressable style={styles.boton} onPress={() => this.crearComentario()}>
+                    <Text style={styles.blanco}> Comentar </Text>
                 </Pressable>
-                <Text>Comentarios: </Text>
-                <FlatList
-                    data={this.props.route.params.comentarios}
-                    keyExtractor={(item) => item.toString()}
-                    renderItem={({ item }) => <View style={styles.commentContainer}>
-                        <Text style={styles.commentEmail}>{item.email}</Text>
-                        <Text style={styles.commentText}>{item.comentario}</Text>
-                    </View>} />
+
+
+
+
+
             </View>
-        )
+        );
     }
 }
 
@@ -79,33 +102,33 @@ const styles = StyleSheet.create({
     conteiner: {
         flex: 1,
         backgroundColor: '#a1b7a1ff',
-        padding: 20,
-        justifyContent: "center",
+        padding: 10,
         width: '100%',
-        flex: 1,
+
     },
     title: {
         fontSize: 28,
         fontWeight: "700",
         color: "#222",
         textAlign: "center",
-        marginBottom: 20,
+        marginBottom: 5,
     },
     input: {
         backgroundColor: "#FFF",
         borderRadius: 10,
         borderWidth: 1,
         borderColor: "#CCC",
-        padding: 14,
+        padding: 4,
         fontSize: 16,
-        marginBottom: 14,
+        marginTop: 3,
+        marginBottom: 5,
     },
     boton: {
         backgroundColor: "#222",
-        paddingVertical: 14,
+        paddingVertical: 10,
         borderRadius: 10,
         alignItems: "center",
-        marginBottom: 24,
+        marginBottom: 5,
     },
     botonText: {
         color: "#FFF",
@@ -117,7 +140,7 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         color: "#333",
         textAlign: "center",
-        marginBottom: 10,
+        marginBottom: 6,
     },
     botonSec: {
         backgroundColor: "#EAEAEA",
@@ -134,12 +157,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "600",
         marginBottom: 5,
-        marginTop: 7,
+        marginTop: 5,
     },
     error: {
         color: "red",
         textAlign: "center",
-        marginTop: 8,
+        marginTop: 5,
     },
     blanco: {
         color: "#dad0d0ff",
@@ -148,8 +171,8 @@ const styles = StyleSheet.create({
     postContainer: {
         backgroundColor: "#fff",
         borderRadius: 12,
-        padding: 16,
-        marginBottom: 20,
+        padding: 5,
+        marginBottom: 6,
         shadowColor: "#000",
         shadowOpacity: 0.1,
         shadowOffset: { width: 0, height: 2 },
@@ -161,26 +184,26 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "600",
         color: "#333",
-        marginBottom: 6,
+        marginBottom: 5,
     },
 
     postText: {
         fontSize: 16,
         color: "#222",
-        marginBottom: 12,
+        marginBottom: 5,
     },
 
     postMeta: {
         fontSize: 14,
         color: "#555",
         fontStyle: "italic",
-        marginBottom: 8,
+        marginBottom: 5,
     },
     commentContainer: {
-        backgroundColor: "#e0f0e0", // verde clarito para diferenciar del post
+        backgroundColor: "#e0f0e0",
         borderRadius: 10,
-        padding: 12,
-        marginBottom: 10,
+        padding: 6,
+        marginBottom: 5,
     },
 
     commentEmail: {
@@ -196,4 +219,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NuevoComentario
+export default NuevoComentario;
+
+
+
